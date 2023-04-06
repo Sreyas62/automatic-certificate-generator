@@ -1,16 +1,16 @@
 #import the necessary libraries</pre>
-
+from PIL import ImageFont, ImageDraw, Image  
 import cv2 as cv
 import openpyxl
 
 	
 # template1.png is the template
 # certificate
-template_path = 'certificate.png'
+template_path = 'certificate.jpg'
 
 # Excel file containing names of
 # the participants
-details_path = 'details.xlsx'
+details_path = 'detail.xlsx'
 
 # Output Paths
 output_path = 'K:\TinkerHub\AutoCerti\output'
@@ -23,8 +23,8 @@ font_color = (0,0,0)
 # Coordinates on the certificate where
 # will be printing the name (set
 # according to your own template)
-coordinate_y_adjustment = 17
-coordinate_x_adjustment = 8
+coordinate_y_adjustment = 80
+coordinate_x_adjustment = 350
 
 # loading the details.xlsx workbook
 # and grabbing the active sheet
@@ -43,9 +43,11 @@ for i in range(1,6):
 							
 	# read the certificate template
 	img = cv.imread(template_path)
+
+	
 								
 	# choose the font from opencv
-	font = cv.FONT_HERSHEY_DUPLEX			
+	font = ImageFont.truetype("arial.ttf", 15)		
 
 	# get the size of the name to be
 	# printed
@@ -68,7 +70,7 @@ for i in range(1,6):
 	# Output path along with the name of the
 	# certificate generated
 	s = str(i);
-	certi_path = output_path + '/cert'+ s + '.png'
+	certi_path = output_path + '/cert'+ s + '.jpg'
 	
 	# Save the certificate					
 	cv.imwrite(certi_path,img)
